@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/ContextProvider";
 
 const SingUp = () => {
+  const [users, setUser] = useState(false);
+  const [selears, setSelears] = useState(false);
   const {
     createUserWithEmailPass,
     updateUserProfile,
@@ -13,7 +15,6 @@ const SingUp = () => {
     setLoader,
     loader,
   } = useContext(AuthContext);
-  console.log(user);
   const [error, setError] = useState(null);
   const {
     register,
@@ -36,6 +37,7 @@ const SingUp = () => {
   };
 
   const handelSignUpForm = (data) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     //  env file thika value paitece na
@@ -103,7 +105,7 @@ const SingUp = () => {
                 id="name"
                 required
                 placeholder="Enter Your fullName"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-gray-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
               />
             </div>
             <div>
@@ -127,7 +129,7 @@ const SingUp = () => {
                 id="email"
                 required
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-gray-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4  bg-gray-200 text-gray-900"
               />
             </div>
             <div>
@@ -142,7 +144,7 @@ const SingUp = () => {
                 id="password"
                 required
                 placeholder="input your password"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-gray-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
               />
             </div>
             <div className="form-control">
@@ -150,7 +152,21 @@ const SingUp = () => {
                 <span className="label-text">You are a Seller</span>
                 <input
                   type="checkbox"
+                  onClick={() => setSelears(!selears)}
+                  disabled={users}
                   {...register("seller")}
+                  className="checkbox checkbox-primary"
+                />
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <span className="label-text">You are a User</span>
+                <input
+                  type="checkbox"
+                  {...register("user")}
+                  onClick={() => setUser(!users)}
+                  disabled={selears}
                   className="checkbox checkbox-primary"
                 />
               </label>
@@ -158,13 +174,7 @@ const SingUp = () => {
           </div>
           <div>
             <button type="submit" className="btn w-full btn-primary">
-              {loader ? (
-                <div className="flex justify-center items-center h-full">
-                  <div className="w-6 h-6 border-2 border-dashed rounded-full animate-spin border-white"></div>
-                </div>
-              ) : (
-                "Sign up"
-              )}
+              Sign up
             </button>
           </div>
         </form>
