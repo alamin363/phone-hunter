@@ -5,7 +5,9 @@ import Error from "./Pages/Error/ErrorPage";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import SingUp from "./Pages/SignUp/SingUp";
-import  {Toaster}  from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import Category from "./Pages/Home/Category/Category";
+import PrivetRouter from "./Pages/PrivetRouter/PrivetRouter";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +18,16 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SingUp /> },
       { path: "/blog", element: <Blog /> },
+      {
+        path: "/category/:id",
+        element: (
+          <PrivetRouter>
+            <Category />
+          </PrivetRouter>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/category/${params.id}`),
+      },
     ],
   },
 ]);

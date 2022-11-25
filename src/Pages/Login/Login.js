@@ -1,56 +1,68 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Context/ContextProvider";
 import { toast } from "react-hot-toast";
 const Login = () => {
-  const {
-    createUserWithEmailPass,
-    signInWithEmailPass,
-    signInWithGoogle,
-    user,
-    LogOut,
-  } = useContext(AuthContext);
+  const { signInWithEmailPass, signInWithGoogle, user, setLoader, loader } =
+    useContext(AuthContext);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  console.log(user?.email);
-
+  const [error, setError] = useState(null);
+   const navigate = useNavigate()
+   const location = useLocation();
+   const from = location.state?.from?.pathname || "/"
   const handelGoogleLogIn = () => {
     signInWithGoogle()
       .then((res) => {
         toast.success("Login successfully");
-        console.log(res?.user?.email);
+        // userBase(res?.user?.email);
+        navigate(from , {replace: true})
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setError("user not found please singUp");
+        setLoader(false);
+      });
   };
   const handelLoginForm = (data) => {
-    console.log(data);
     signInWithEmailPass(data?.email, data?.password)
       .then((res) => {
         console.log(res);
-
         toast.success("Login successfully");
+        navigate(from , {replace: true})
+        // userBase(data);
       })
       .catch((err) => {
-        console.log(err?.message);
+        setError("user not found please singUp");
+        setLoader(false);
       });
   };
+  // const userBase = (data) => {
+  //   if (data) {
+  //     fetch("http://localhost:5000/user", {
+  //       method: "POST",
+  //       headers: {
+  //         "content-type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(data)
+  //       });
+  // }
+  //  }
   return (
     <div className="flex justify-center items-center pt-8">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
-        <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Sign in</h1>
+        <div className="mb-5 text-center">
+          <h1 className="text-primary text-4xl font-bold">Sign in</h1>
         </div>
-        <form
-          onSubmit={handleSubmit(handelLoginForm)}
-          noValidate=""
-          action=""
-          className="space-y-6 ng-untouched ng-pristine ng-valid"
-        >
+        <form onSubmit={handleSubmit(handelLoginForm)} className="space-y-6">
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
@@ -83,7 +95,7 @@ const Login = () => {
           </div>
 
           <div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn w-full btn-primary">
               Log In
             </button>
           </div>
@@ -112,17 +124,17 @@ const Login = () => {
           Don't have a account?
           <Link
             to="/signup"
-            className="underline hover:underline-offset-0 text-gray-600"
+            className="underline hover:no-underline text-gray-600"
           >
             Sign up
           </Link>
         </p>
-        {errors && (
-          <p className="text-red-500 font-semibold">{errors?.message}</p>
-        )}
+        {
+          error && <p className="text-red-500 font-semibold">{error}</p>
+        }
       </div>
     </div>
   );
-};
+ }
 
 export default Login;
