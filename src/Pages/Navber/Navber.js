@@ -41,19 +41,16 @@ const Navbar = () => {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
-            <li className="my-3">
+            <li>
               <NavLink to="/blog">Blog</NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
-            {/* <li className="my-3">
-              <NavLink to="/addproduct">addProduct</NavLink>
-            </li> */}
 
-            <li className="my-3">
+            <li>
               {user ? (
-                <Link onClick={handelLogOut}>Logout </Link>
+                <>
+                  <NavLink to="/dashboard">Dashboard</NavLink>
+                  <Link onClick={handelLogOut}>Logout </Link>
+                </>
               ) : (
                 <Link to="/login">Login</Link>
               )}
@@ -95,14 +92,11 @@ const Navbar = () => {
             <NavLink to="/blog">Blog</NavLink>
           </li>
           <li>
-            <NavLink to="/addproduct">addProduct</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
-          <li>
             {user ? (
+              <>
+              <NavLink to="/dashboard">Dashboard</NavLink>
               <Link onClick={handelLogOut}>Logout </Link>
+              </>
             ) : (
               <Link to="/login">Login</Link>
             )}

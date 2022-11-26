@@ -21,7 +21,6 @@ const Modal = ({ modalData, setModalData }) => {
     orginalprice,
   } = modalData;
   const users = user.email;
-  console.log(users);
   const myWishes = {
     Price,
     Authenticity,
@@ -45,7 +44,10 @@ const Modal = ({ modalData, setModalData }) => {
   const secound = date.getSeconds();
   const dates = date.toLocaleDateString();
   const currentDate = { hours, minite, secound, dates };
-  const handeloModaleForm = () => {
+
+  const handeloModaleForm = (e) => {
+    e.preventDefault()
+    myWishes.currentDate = currentDate;
     fetch("http://localhost:5000/bookingProduct", {
       method: "POST",
       headers: {
@@ -53,15 +55,16 @@ const Modal = ({ modalData, setModalData }) => {
       },
       body: JSON.stringify(myWishes),
     })
-      .then((res) => res.json(modalData, user.email))
+      .then((res) => res.json())
       .then((data) => {
         toast.success("Product broking success");
+        console.log(data);
       })
       .catch((err) => toast.error(err?.message));
   };
-
+  // modalData, user.email
   return (
-    <div>
+    <div className="">
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">

@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/ContextProvider";
+import OrderCard from "./OrderCard/OrderCard";
 
 const MyOrders = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loader } = useContext(AuthContext);
   const email = user?.email;
   const {
     data: bookingProduct = [],
@@ -17,30 +19,30 @@ const MyOrders = () => {
         res.json()
       ),
   });
+  if (!user?.email) {
+    refetch()
+  }
+  if (loader) {
+    return <h1>Loading ..</h1>;
+  }
   if (isLoading) {
     return <h1>Loading ..</h1>;
   }
   console.log(bookingProduct);
+  if (!bookingProduct.length) {
+    return <div>
+      <h1>Your booking product  is null</h1>
+      <p>Please booking Your fav. product </p>
+      <div className="divider font-extrabold"></div>
+      <h1 className="text-center">Or</h1>
+      <div className="divider font-extrabold"></div>
+      <Link to='/dashboard' className="underline bg-primary hover:no-underline  hover:scale-50"><p>Check your net Connection</p></Link>
+    </div>
+  }
+
   return (
-    <div>
-      {bookingProduct.map((product) => {
-        return (
-          <div>
-            
-            <div className="border m-10 cursor-wait">
-              <label className="" htmlFor="">
-                <h3 className="text-lg font-bold">
-                  Congratulations random Internet user!
-                </h3>
-                <p className="py-4">
-                  You've been selected for a chance to get one year of
-                  subscription to use Wikipedia for free!
-                </p>
-              </label>
-            </div>
-          </div>
-        );
-      })}
+    <div className="grid grid-cols-1 gap-3">
+      {bookingProduct.map((product) => <OrderCard  key={product._id} product={product} isLoading={isLoading}/>)}
     </div>
   );
 };

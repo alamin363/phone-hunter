@@ -11,29 +11,49 @@ import PrivetRouter from "./Pages/PrivetRouter/PrivetRouter";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import AddProduct from "./Pages/AddProduct/AddProduct";
 import MyOrders from "./Pages/MyOrders/MyOrders";
+import Payment from "./Pages/Payment/Payment";
+import Admin from "./Pages/Admin/Admin";
+import Myproduct from "./Pages/Myproduct/Myproduct";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
     errorElement: <Error />,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/login", element: <Login /> },
-      { path: "/signup", element: <SingUp /> },
-      { path: "/blog", element: <Blog /> },
-      { path: "/addproduct", element: <AddProduct /> },
-      { path: "/dashboard", element: <Dashboard /> },
-      { path: "/order", element: <MyOrders /> },
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SingUp />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
       {
         path: "/category/:id",
-        element: (
-          <PrivetRouter>
-            <Category />
-          </PrivetRouter>
-        ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.id}`),
+        element: <Category />,
+        loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      { path: "/dashboard", element: <AddProduct /> },
+      { path: "/dashboard/order", element: <MyOrders /> },
+      { path: "/dashboard/payment", element: <Payment /> },
+      { path: "/dashboard/admin", element: <Admin /> },
+      { path: "/dashboard/myproduct", element: <Myproduct /> }
+ 
+      
     ],
   },
 ]);
