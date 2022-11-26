@@ -39,13 +39,13 @@ const MyProductCard = ({dt, refetch}) => {
               <p>
                 <small className="border-b-4 font-extrabold  border-primary">
                   Brand:
-                </small>{" "}
+                </small>
                 <small className="font-bold">{Brand}</small>
               </p>
               <p>
                 <small className="border-b-4 font-extrabold  border-primary">
                   Original Price:
-                </small>{" "}
+                </small>
                 <small className="font-bold">{orginalprice} TK</small>
               </p>
 
