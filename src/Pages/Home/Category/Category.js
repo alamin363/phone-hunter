@@ -12,7 +12,7 @@ const Category = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {data.map((singleData) => {
         return (
-          <div key={singleData._id} className="w-96 bg-base-100 shadow-xl mx-auto my-20 relative">
+          <div key={singleData._id} className="w-96 border border-primary bg-base-100 shadow-xl mx-auto my-20 relative">
             <figure>
               <PhotoProvider>
                 <PhotoView src={singleData.image}>

@@ -7,6 +7,7 @@ const Modal = ({ modalData, setModalData }) => {
   const [userLocation, setUserLocation] = useState({});
   const [userNumber, setUserNumber] = useState({});
   const [userMetTimeAndDate, setuserMetTimeAndDate] = useState({});
+
   const {
     Price,
     Authenticity,
@@ -20,11 +21,10 @@ const Modal = ({ modalData, setModalData }) => {
     recelPrice,
     orginalprice,
   } = modalData;
-  
+  console.log(modalData)
   const users = user.email;
 
   const myWishes = {
-    Price,
     Authenticity,
     Brand,
     Condition,
@@ -47,6 +47,7 @@ const Modal = ({ modalData, setModalData }) => {
   const dates = date.toLocaleDateString();
   const currentDate = { hours, minite, secound, dates };
 
+  
   const handeloModaleForm = (e) => {
     e.preventDefault()
     myWishes.currentDate = currentDate;

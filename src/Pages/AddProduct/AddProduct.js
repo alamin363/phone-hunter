@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useLocation } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/ContextProvider";
 
 const AddProduct = () => {
   const { user, loader } = useContext(AuthContext);
-  const location = useLocation()
+  const navigate = useNavigate();
   const email = user?.email;
   const name = user?.displayName;
   const {
@@ -38,19 +38,22 @@ const AddProduct = () => {
               "content-type": "application/json",
             },
             body: JSON.stringify(data),
-          }).then(res => {
-            toast.success("Product add successfully")
-            // location("/")
-          }).catch(() => {
-            toast.error("Product added failed")
           })
+            .then((res) => {
+              toast.success("Product add successfully");
+              navigate("/dashboard/myproduct");
+              // navigate();
+            })
+            .catch(() => {
+              toast.error("Product added failed");
+            });
         }
       })
       .catch((error) => toast.error(error?.message));
   };
-  if (loader) {
-    return <h1> Loading ..</h1>;
-  }
+  // const navigate = () => {
+  //   <Navigate to="/dashboard/myproduct"> </Navigate>
+  // }
   return (
     <div>
       <form onSubmit={handleSubmit(handlePost)} action="">
@@ -105,7 +108,7 @@ const AddProduct = () => {
         </div>
         <div>
           <label htmlFor="name" className="block mb-2 text-sm">
-          Brand
+            Brand
           </label>
           <select
             {...register("Brand", { required: true })}
@@ -150,6 +153,18 @@ const AddProduct = () => {
             id="name"
             {...register("location")}
             placeholder="Enter Your current Location"
+            className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
+          />
+        </div>
+        <div>
+          <label htmlFor="name" className="block mb-2 text-sm">
+            uses Time With this items
+          </label>
+          <input
+            type="number"
+            id="name"
+            {...register("useYears")}
+            placeholder="Enter your uses Time Or year"
             className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
           />
         </div>
@@ -221,7 +236,7 @@ const AddProduct = () => {
         </div>
         <div>
           <label htmlFor="name" className="block mb-2 text-sm">
-            Your meeting Date And Time
+            Date And Time
           </label>
           <input
             type="datetime-local"

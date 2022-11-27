@@ -37,12 +37,10 @@ const SingUp = () => {
   };
 
   const handelSignUpForm = (data) => {
-    console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     //  env file thika value paitece na
     const url = `https://api.imgbb.com/1/upload?key=c36ec5ccc3f15f866393849181965509`;
-    console.log(url);
     fetch(url, {
       method: "POST",
       body: formData,
@@ -52,17 +50,21 @@ const SingUp = () => {
         console.log(imgData);
         createUserWithEmailPass(data?.email, data?.password)
           .then((res) => {
-            setLoader(false);
             // console.log(res);
             updateUserProfile(data?.name, imgData.data.display_url).then(
-              (data) => {
+              (datas) => {
+                data.image = imgData.data.display_url;
+                if (data?.seller) {
+                  data.role = "seller"
+                }else if (data?.user) {
+                  data.role = "user"
+                }
+                userBase(data)
                 toast.success("Account create and Login successfully");
-                userBase(data);
               }
             );
           })
           .catch((err) => {
-            setLoader(false);
             console.log(err?.message);
           });
       })
@@ -70,8 +72,10 @@ const SingUp = () => {
         setError(error?.message);
       });
   };
-
+  
+  
   const userBase = (data) => {
+    console.log(data);
     if (data) {
       fetch("http://localhost:5000/user", {
         method: "POST",

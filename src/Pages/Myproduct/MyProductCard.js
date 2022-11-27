@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
-import AdvertiseModal from "./AdvertiseModal";
-import ModalProduct from "./ModalProduct";
-import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
+// import AdvertiseModal from "./AdvertiseModal";
+// import ModalProduct from "./ModalProduct";
+// import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
 import { FaCopyright } from "react-icons/fa";
 const MyProductCard = ({ dt, refetch }) => {
   const {
@@ -21,8 +21,20 @@ const MyProductCard = ({ dt, refetch }) => {
     users,
     _id,
   } = dt;
-  const deleteConfirm = () => {
-    fetch(`http://localhost:5000/product/${_id}`, {
+  const deleteConfirm = (id) => {
+    fetch(`http://localhost:5000/product/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        toast.success("delete successfully");
+        console.log(res);
+        refetch();
+      })
+      .catch(() => {
+        toast.error("delete filed check connection");
+      });
+
+    fetch(`http://localhost:5000/ads/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -34,14 +46,17 @@ const MyProductCard = ({ dt, refetch }) => {
         toast.error("delete filed check connection");
       });
   };
-  const hadelAdvertise = () => {
-    dt.Advertised = "Ads"
+
+  const hadelAdvertise = (Ads) => {
+    Ads.Advertised = "Ads"
+    Ads.id = _id;
+
     fetch(`http://localhost:5000/Advertise`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body:JSON.stringify(dt)
+      body:JSON.stringify(Ads)
     }).then(res => {
       toast.success(`product Advertised`)
       
@@ -49,7 +64,6 @@ const MyProductCard = ({ dt, refetch }) => {
       toast.error(error?.message)
     })
   };
-  console.log(_id);
   return (
     <div>
       <div className="border relative border-primary p-10 cursor-pointer">
@@ -119,21 +133,23 @@ const MyProductCard = ({ dt, refetch }) => {
           </p>
         </div>
         <label
+         onClick={() =>  deleteConfirm(_id) }
           htmlFor="delete-confirm"
-          className="btn btn-sm btn-circle absolute right-2 top-2"
+          className="btn absolute right-2 top-2"
         >
-          ✕
+          Delete 
         </label>
         <label
+        onClick={() => hadelAdvertise(dt)}
           htmlFor="Advertise-confirm"
           className="btn btn-sm btn-primary absolute left-2-2 top-2"
         >
-          {" "}
           Advertise{" "}
         </label>
       </div>
-      <ModalProduct deleteConfirm={deleteConfirm} />
-      <AdvertiseModal hadelAdvertise={hadelAdvertise} />
+      {/*  loool  */}
+      {/* <ModalProduct deleteConfirm={deleteConfirm} />
+      <AdvertiseModal ads={ads} dt={dt} setAds={setAds} hadelAdvertise={hadelAdvertise} /> */}
     </div>
   );
 };

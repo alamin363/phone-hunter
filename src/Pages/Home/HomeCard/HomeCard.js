@@ -7,7 +7,7 @@ const HomeCard = ({ phoneData }) => {
   const { brand, photo } = phoneData;
   return (
     <div>
-      <div className="w-96 bg-base-100 shadow-xl mx-auto my-20">
+      <div className="w-96 bg-base-100 border border-primary shadow-xl mx-auto my-20">
         <figure>
           <img src={photo} className="h-96 w-full" alt="Shoes" />
         </figure>

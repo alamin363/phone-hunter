@@ -13,7 +13,6 @@ const Navbar = () => {
   };
   // direact manupuleate dashbord
   let dashborad = document.location.pathname;
-
   return (
     <div className="navbar bg-base-100 flex justify-between">
       <div className="navbar-start">
@@ -62,7 +61,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {dashborad === "/dashboard" && (
+      {dashborad !== "/" && (
         <li>
           <label htmlFor="my-drawer-2" className="drawer-button lg:hidden">
             <svg

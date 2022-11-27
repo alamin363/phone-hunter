@@ -19,9 +19,7 @@ const MyOrders = () => {
         res.json()
       ),
   });
-  if (loader) {
-    return <h1>Loading ..</h1>;
-  }
+
   if (isLoading) {
     return <h1>Loading ..</h1>;
   }

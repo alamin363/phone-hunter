@@ -20,7 +20,7 @@ const Home = () => {
   }
   return (
     <div>
-       {/* <Carousel categoryDAta ={categoryDAta }/> */}
+       <Carousel categoryDAta ={categoryDAta }/>
       <div className="grid grid-cols-1 md:grid-cols-2">
         {
         categoryDAta.map(phoneData => <HomeCard key={phoneData._id} phoneData ={phoneData}/>)
@@ -28,12 +28,15 @@ const Home = () => {
       </div> 
      
      <div>
-     <div className="divider">ADs Product <FaArrowAltCircleDown className='w-5/12'/></div>
+     { Advertised.length > 0 && <>
+     <div className="divider text-center text-primary">ADs Product <FaArrowAltCircleDown className='w-5/12'/></div>
      <div className="grid grid-cols-1 md:grid-cols-2">
       {
         Advertised.map(ads => <Ads ads={ads}/>)
       }
      </div>
+     </>
+     }
      </div>
 
     </div>
