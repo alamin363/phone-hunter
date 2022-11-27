@@ -15,7 +15,6 @@ const Admin = () => {
   if (isLoading) {
     return <h1> loading ..</h1>;
   }
-  console.log(users);
   const handleMakeAdmin = (id) => {
     fetch(`http://localhost:5000/admin/${id}`, {
       method: "PUT",

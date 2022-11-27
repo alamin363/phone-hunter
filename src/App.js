@@ -14,6 +14,7 @@ import MyOrders from "./Pages/MyOrders/MyOrders";
 import Payment from "./Pages/Payment/Payment";
 import Admin from "./Pages/Admin/Admin";
 import Myproduct from "./Pages/Myproduct/Myproduct";
+import AdminRouter from "./Pages/AdminRouter/AdminRouter";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
       { path: "/dashboard", element: <AddProduct /> },
       { path: "/dashboard/order", element: <MyOrders /> },
       { path: "/dashboard/payment", element: <Payment /> },
-      { path: "/dashboard/admin", element: <Admin /> },
+      { path: "/dashboard/admin", element: <AdminRouter> <Admin /> </AdminRouter> },
       { path: "/dashboard/myproduct", element: <Myproduct /> }
  
       
