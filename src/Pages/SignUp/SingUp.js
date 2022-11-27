@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/ContextProvider";
+import Loader from "../Loader/Loader";
 
 const SingUp = () => {
   const [users, setUser] = useState(false);
   const [selears, setSelears] = useState(false);
+  const naviagete = useNavigate()
   const {
     createUserWithEmailPass,
     updateUserProfile,
@@ -28,6 +30,7 @@ const SingUp = () => {
       .then((res) => {
         toast.success("Login successfully");
         // userBase(res?.user?.email);
+        naviagete("/")
         setLoader(false);
       })
       .catch((err) => {
@@ -61,6 +64,7 @@ const SingUp = () => {
                 }
                 userBase(data)
                 toast.success("Account create and Login successfully");
+                naviagete("/")
               }
             );
           })

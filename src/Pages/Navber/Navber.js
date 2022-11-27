@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/ContextProvider";
+import Loader from "../Loader/Loader";
 const Navbar = () => {
-  const { user, LogOut } = useContext(AuthContext);
+  const { user, LogOut, loader } = useContext(AuthContext);
   const navigate = useNavigate();
   const handelLogOut = () => {
     LogOut().then(() => {
@@ -11,6 +12,9 @@ const Navbar = () => {
       navigate("login");
     });
   };
+  // if (loader) {
+  //   return <Loader />;
+  // }
   // direact manupuleate dashbord
   let dashborad = document.location.pathname;
   return (
@@ -43,7 +47,9 @@ const Navbar = () => {
             <li>
               <NavLink to="/blog">Blog</NavLink>
             </li>
-
+            <li>
+              <NavLink to="/populerproduct">Products</NavLink>
+            </li>
             <li>
               {user ? (
                 <>
@@ -91,10 +97,13 @@ const Navbar = () => {
             <NavLink to="/blog">Blog</NavLink>
           </li>
           <li>
+            <NavLink to="/Populerproduct">Products</NavLink>
+          </li>
+          <li>
             {user ? (
               <>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-              <Link onClick={handelLogOut}>Logout </Link>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+                <Link onClick={handelLogOut}>Logout </Link>
               </>
             ) : (
               <Link to="/login">Login</Link>

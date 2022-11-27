@@ -42,7 +42,7 @@ const AddProduct = () => {
             .then((res) => {
               toast.success("Product add successfully");
               navigate("/dashboard/myproduct");
-              // navigate();
+              navigates();
             })
             .catch(() => {
               toast.error("Product added failed");
@@ -51,9 +51,9 @@ const AddProduct = () => {
       })
       .catch((error) => toast.error(error?.message));
   };
-  // const navigate = () => {
-  //   <Navigate to="/dashboard/myproduct"> </Navigate>
-  // }
+  const navigates = () => {
+    <Navigate to="/dashboard/myproduct"> </Navigate>
+  }
   return (
     <div>
       <form onSubmit={handleSubmit(handlePost)} action="">

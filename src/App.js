@@ -15,6 +15,7 @@ import Payment from "./Pages/Payment/Payment";
 import Admin from "./Pages/Admin/Admin";
 import Myproduct from "./Pages/Myproduct/Myproduct";
 import AdminRouter from "./Pages/AdminRouter/AdminRouter";
+import PopulerProduct from "./Pages/PopulerProduct/PopulerProduct";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,24 +39,70 @@ const router = createBrowserRouter([
         element: <Blog />,
       },
       {
+        path: "/populerproduct",
+        element: <PopulerProduct />,
+      },
+      {
         path: "/category/:id",
-        element: <PrivetRouter> <Category /> </PrivetRouter>,
-        loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+        element: (
+          <PrivetRouter>
+            {" "}
+            <Category />{" "}
+          </PrivetRouter>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/category/${params.id}`),
       },
     ],
   },
   {
     path: "/dashboard",
     element: <Dashboard />,
+    errorElement: <Error />,
     children: [
-      { path: "/dashboard", element: <AddProduct /> },
-      { path: "/dashboard/order", element: <MyOrders /> },
-      { path: "/dashboard/payment", element: <Payment /> },
-      { path: "/dashboard/admin", element: <AdminRouter> <Admin /> </AdminRouter> },
-      { path: "/dashboard/myproduct", element: <Myproduct /> }
- 
-      
+      {
+        path: "/dashboard",
+        element:<PrivetRouter><AddProduct /></PrivetRouter> ,
+      },
+      {
+        path: "/dashboard/order",
+        element: (
+          <PrivetRouter>
+            <MyOrders />
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "/dashboard/payment",
+        element: (
+          <PrivetRouter>
+            <Payment />
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "/dashboard/admin",
+        element: (
+          <AdminRouter>
+            {" "}
+            <Admin />{" "}
+          </AdminRouter>
+        ),
+      },
+      {
+        path: "/dashboard/myproduct",
+        element: (
+          <PrivetRouter>
+            <Myproduct />
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "*",
+        element: <Error /> ,
+      },
     ],
+      
   },
 ]);
 function App() {

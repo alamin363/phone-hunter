@@ -5,6 +5,7 @@ import HomeCard from "./HomeCard/HomeCard";
 import Carousel from "./Carousel/Carousel"
 import Ads from "./Ads/Ads";
 import { FaArrowAltCircleDown } from "react-icons/fa";
+import Loader from "../Loader/Loader";
 const Home = () => {
   const {} = useContext(AuthContext)
   const {data : categoryDAta = [], refetch,isLoading,error,} = useQuery({
@@ -38,7 +39,6 @@ const Home = () => {
      </>
      }
      </div>
-
     </div>
   );
 };

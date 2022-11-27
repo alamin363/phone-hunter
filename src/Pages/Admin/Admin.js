@@ -28,6 +28,7 @@ const Admin = () => {
     })
   };
   const handleDelete = (id) => {
+    console.log(id)
     fetch(`http://localhost:5000/`);
   };
   return (
@@ -64,7 +65,7 @@ const Admin = () => {
                     )}
                   </td>
                   <td>
-                    <button className="btn btn-xs btn-danger">Delete</button>
+                    <button onClick={() => handleDelete(user._id)} className="btn btn-xs btn-danger">Delete</button>
                   </td>
                 </tr>
               ))}
