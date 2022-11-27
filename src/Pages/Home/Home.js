@@ -4,17 +4,20 @@ import { AuthContext } from "../Context/ContextProvider";
 import HomeCard from "./HomeCard/HomeCard";
 import Carousel from "./Carousel/Carousel"
 import Ads from "./Ads/Ads";
+import { FaArrowAltCircleDown } from "react-icons/fa";
 const Home = () => {
   const {} = useContext(AuthContext)
   const {data : categoryDAta = [], refetch,isLoading,error,} = useQuery({
     queryKey: ["brand"],
     queryFn: () => fetch("http://localhost:5000/category").then(data => data.json())
   });
-  console.log()
+  const {data : Advertised = [], refetch : reloade ,isLoading : loading} = useQuery({
+    queryKey: ["Advertise"],
+    queryFn: () => fetch("http://localhost:5000/Advertise").then(data => data.json())
+  });
   if (isLoading) {
     return <p>Loading ...</p>
   }
-  console.log(categoryDAta);
   return (
     <div>
        {/* <Carousel categoryDAta ={categoryDAta }/> */}
@@ -23,7 +26,15 @@ const Home = () => {
         categoryDAta.map(phoneData => <HomeCard key={phoneData._id} phoneData ={phoneData}/>)
         }
       </div> 
-     <Ads />
+     
+     <div>
+     <div className="divider">ADs Product <FaArrowAltCircleDown className='w-5/12'/></div>
+     <div className="grid grid-cols-1 md:grid-cols-2">
+      {
+        Advertised.map(ads => <Ads ads={ads}/>)
+      }
+     </div>
+     </div>
 
     </div>
   );

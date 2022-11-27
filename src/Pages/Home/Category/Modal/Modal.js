@@ -20,7 +20,9 @@ const Modal = ({ modalData, setModalData }) => {
     recelPrice,
     orginalprice,
   } = modalData;
+  
   const users = user.email;
+
   const myWishes = {
     Price,
     Authenticity,
@@ -58,7 +60,6 @@ const Modal = ({ modalData, setModalData }) => {
       .then((res) => res.json())
       .then((data) => {
         toast.success("Product broking success");
-        console.log(data);
       })
       .catch((err) => toast.error(err?.message));
   };

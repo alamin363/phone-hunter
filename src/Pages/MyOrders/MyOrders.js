@@ -19,17 +19,14 @@ const MyOrders = () => {
         res.json()
       ),
   });
-  if (!user?.email) {
-    refetch()
-  }
   if (loader) {
     return <h1>Loading ..</h1>;
   }
   if (isLoading) {
     return <h1>Loading ..</h1>;
   }
-  console.log(bookingProduct);
-  if (!bookingProduct.length) {
+  console.log(bookingProduct)
+  if (!bookingProduct?.length) {
     return <div>
       <h1>Your booking product  is null</h1>
       <p>Please booking Your fav. product </p>

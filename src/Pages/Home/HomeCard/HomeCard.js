@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 const HomeCard = ({ phoneData }) => {
   const { brand, photo } = phoneData;
-  console.log(phoneData);
-
   return (
     <div>
       <div className="w-96 bg-base-100 shadow-xl mx-auto my-20">
@@ -20,7 +18,6 @@ const HomeCard = ({ phoneData }) => {
               Go Details <FaArrowRight className="ml-3" />{" "}
             </button>
           </Link>
-          {/* <Link to="/login">hi</Link> */}
         </div>
       </div>
     </div>

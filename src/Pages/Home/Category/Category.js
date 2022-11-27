@@ -7,7 +7,6 @@ import "react-photo-view/dist/react-photo-view.css";
 const Category = () => {
   
   const data = useLoaderData();
-  console.log(data);
   const [modalData, setModalData] = useState(null);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

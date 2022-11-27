@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const OrderCard = ({ product, isLoading }) => {
-  console.log(product);
   const {
     users: email,
     userNumber,
