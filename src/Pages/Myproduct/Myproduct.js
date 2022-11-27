@@ -25,4 +25,4 @@ const Myproduct = () => {
   );
 };
 
-export default Myproduct
+export default Myproduct;
