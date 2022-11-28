@@ -61,6 +61,7 @@ const SingUp = () => {
             updateUserProfile(data?.name, imgData.data.display_url).then(
               (datas) => {
                 data.image = imgData.data.display_url;
+                data.verified = false;
                 if (data?.seller) {
                   data.role = "seller"
                 }else if (data?.user) {

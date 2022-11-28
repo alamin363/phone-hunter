@@ -9,7 +9,6 @@ const SellerRout = ({children}) => {
   const [ isSeller, isLoading] = useAdmin(user?.email);
   
   const location = useLocation();
-
   if (loader || isLoading) {
     return <Loader />;
   }

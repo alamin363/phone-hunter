@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/ContextProvider";
+import Loader from "../../Loader/Loader";
 
 const OrderCard = ({ product, isLoading }) => {
+  const { user, loader} = useContext(AuthContext)
   const {
     users: email,
     userNumber,
@@ -18,8 +21,8 @@ const OrderCard = ({ product, isLoading }) => {
     Brand,
     Authenticity,
   } = product;
-  if (isLoading) {
-    return <h1>Loading ...</h1>;
+  if (isLoading || loader) {
+    return <Loader />;
   }
 
   return (
@@ -110,7 +113,7 @@ const OrderCard = ({ product, isLoading }) => {
             </p>
           </div>
         </label>
-        <Link to="/dashboard/payment">
+        <Link to={`/dashboard/payment/${user?.email}`}>
           <button className="btn btn-primary mt-5 w-52">Pay</button>
         </Link>
       </div>

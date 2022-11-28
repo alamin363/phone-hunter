@@ -39,15 +39,28 @@ const Admin = () => {
         console.log(err);
       });
   };
+  const handleMakeVarify = (id) => {
+    fetch(`http://localhost:5000/verified/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage?.getItem("accessToken")}`,
+      },
+    }).then(res => {
+      refetch()
+      toast.success("seller verified successfully")
+    }).catch(error => toast.error(error.message))
+  };
   const handleDelete = (id) => {
     console.log(id);
     fetch(`http://localhost:5000/usersseler/${id}`, {
       method: "DELETE",
-    }).then(res => {
-      refetch()
-    }).catch(error => {
-      toast.error(error.message)
     })
+      .then((res) => {
+        refetch();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
@@ -61,6 +74,7 @@ const Admin = () => {
                 <th></th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>verified</th>
                 <th>role</th>
                 <th>Admin</th>
                 <th>Delete</th>
@@ -72,6 +86,18 @@ const Admin = () => {
                   <th>{index + 1}</th>
                   <td>{user?.name}</td>
                   <td>{user?.email}</td>
+                  <td>
+                    {user?.verified !== true ? (
+                      <button
+                        onClick={() => handleMakeVarify(user?._id)}
+                        className="btn btn-xs btn-primary"
+                      >
+                        verified
+                      </button>
+                    ) : (
+                      <p className="text-primary">true</p>
+                    )}
+                  </td>
                   <td>{user?.role}</td>
                   <td>
                     {user?.role !== "admin" && (

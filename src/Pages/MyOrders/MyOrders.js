@@ -23,7 +23,6 @@ const MyOrders = () => {
   if (isLoading) {
     return <h1>Loading ..</h1>;
   }
-  console.log(bookingProduct)
   if (!bookingProduct?.length) {
     return <div>
       <h1>Your booking product  is null</h1>

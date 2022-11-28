@@ -5,7 +5,7 @@
 
 // const Seller = ({ users, handleMakeAdmin, handleDelete }) => {
 //   const { user } = useContext(AuthContext);
-//   const [isAdmin, isSeller, isLoading, isUser] = useAdmin(user?.email);
+//   const [isAdmin] = useAdmin(user?.email);
 //   if (isLoading) {
 //     return <Loader />;
 //   }

@@ -23,7 +23,6 @@ const useAdmin = (email) => {
         console.log(error);
       });
   }, [email]);
-  console.log(isAdmin)
   //  setIsAdmin()
   if (loader) {
     return <Loader />;

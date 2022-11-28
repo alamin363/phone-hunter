@@ -29,7 +29,7 @@ const Footer = () => {
         Contact
       </Link>
       <Link to="/" className="link link-hover">
-        Jobs
+        company
       </Link>
       <Link to="/" className="link link-hover">
         Press kit
@@ -49,7 +49,7 @@ const Footer = () => {
     </div>
   </footer>
   <div className="text-center mt-10">
-    <p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
+    <p>Copyright © 2022 - All right reserved by Phone Hunter Ltd.. </p>
   </div>
    </>
   );

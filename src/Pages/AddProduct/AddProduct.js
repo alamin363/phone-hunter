@@ -42,7 +42,7 @@ const AddProduct = () => {
             .then((res) => {
               toast.success("Product add successfully");
               navigate("/dashboard/myproduct");
-              navigates();
+              <Navigate to='/dashboard/myproduct'></Navigate>
             })
             .catch(() => {
               toast.error("Product added failed");

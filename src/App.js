@@ -99,7 +99,9 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/payment",
+        path: "/dashboard/payment/:email",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/bookingProduct?email=${params.email}`),
         element: (
           // <PrivetRouter>
           <Payment />
@@ -121,9 +123,9 @@ const router = createBrowserRouter([
         element: (
           // <PrivetRouter>
           //   <AdminRouter>
-              <User />
-            // </AdminRouter>
-          // </PrivetRouter> 
+          <User />
+          // </AdminRouter>
+          // </PrivetRouter>
         ),
       },
       {
@@ -131,7 +133,7 @@ const router = createBrowserRouter([
         element: (
           // <PrivetRouter>
           //   <SellerRout>
-              <Myproduct />
+          <Myproduct />
           //   </SellerRout>
           // </PrivetRouter>
         ),
