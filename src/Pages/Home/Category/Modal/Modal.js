@@ -21,7 +21,6 @@ const Modal = ({ modalData, setModalData }) => {
     recelPrice,
     orginalprice,
   } = modalData;
-  console.log(modalData)
   const users = user.email;
 
   const myWishes = {
@@ -38,7 +37,7 @@ const Modal = ({ modalData, setModalData }) => {
     users,
     userLocation,
     userNumber,
-    userMetTimeAndDate
+    userMetTimeAndDate,
   };
   const date = new Date();
   const hours = date.getHours();
@@ -47,11 +46,11 @@ const Modal = ({ modalData, setModalData }) => {
   const dates = date.toLocaleDateString();
   const currentDate = { hours, minite, secound, dates };
 
-  
+  console.log(recelPrice);
   const handeloModaleForm = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     myWishes.currentDate = currentDate;
-    fetch("http://localhost:5000/bookingProduct", {
+    fetch("https://used-phone-resale-server-side.vercel.app/bookingProduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -65,6 +64,7 @@ const Modal = ({ modalData, setModalData }) => {
       .catch((err) => toast.error(err?.message));
   };
   // modalData, user.email
+  // console.log(Price)
   return (
     <div className="">
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -140,8 +140,8 @@ const Modal = ({ modalData, setModalData }) => {
                 type="text"
                 id="name"
                 readOnly
-                defaultValue={recelPrice}
-                placeholder="Enter Your fullName"
+                defaultValue={Price ? Price : 1000 }
+                placeholder="Product Price"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
               />
             </div>
@@ -185,6 +185,19 @@ const Modal = ({ modalData, setModalData }) => {
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
               />
             </div>
+            {/* <div>
+              <label htmlFor="name" className="block mb-2 text-sm">
+                Market Price(new)
+              </label>
+              <input
+                type="text"
+                id="name"
+                readOnly
+                defaultValue={orginalprice}
+                placeholder="Product Price"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
+              />
+            </div> */}
             <div>
               <label htmlFor="name" className="block mb-2 text-sm">
                 Your meeting location
@@ -200,13 +213,13 @@ const Modal = ({ modalData, setModalData }) => {
             </div>
             <div>
               <label htmlFor="name" className="block mb-2 text-sm">
-                Your meeting Date And Time 
+                Your meeting Date And Time
               </label>
               <input
                 type="datetime-local"
                 required
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
-                onBlur={e => setuserMetTimeAndDate(e.target.value)}
+                onBlur={(e) => setuserMetTimeAndDate(e.target.value)}
                 name=""
                 id=""
               />

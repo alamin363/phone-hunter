@@ -17,7 +17,7 @@ const Admin = () => {
   } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      fetch("http://localhost:5000/seller").then((res) => res.json()),
+      fetch("https://used-phone-resale-server-side.vercel.app/seller").then((res) => res.json()),
   });
   if (isLoading || loader) {
     return <Loader />;
@@ -25,7 +25,7 @@ const Admin = () => {
   console.log(seller);
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/admin/${id}`, {
+    fetch(`https://used-phone-resale-server-side.vercel.app/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage?.getItem("accessToken")}`,
@@ -40,7 +40,7 @@ const Admin = () => {
       });
   };
   const handleMakeVarify = (id) => {
-    fetch(`http://localhost:5000/verified/${id}`, {
+    fetch(`https://used-phone-resale-server-side.vercel.app/verified/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage?.getItem("accessToken")}`,
@@ -52,7 +52,7 @@ const Admin = () => {
   };
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/usersseler/${id}`, {
+    fetch(`https://used-phone-resale-server-side.vercel.app/usersseler/${id}`, {
       method: "DELETE",
     })
       .then((res) => {

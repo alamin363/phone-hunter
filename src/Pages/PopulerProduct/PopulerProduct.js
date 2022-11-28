@@ -14,7 +14,7 @@ const PopulerProduct = () => {
   } = useQuery({
     queryKey: ["image"],
     queryFn: () =>
-      fetch("http://localhost:5000/product").then((res) => res.json()),
+      fetch("https://used-phone-resale-server-side.vercel.app/product").then((res) => res.json()),
   });
   if (isLoading || loader) {
     return <Loader />;

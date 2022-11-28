@@ -12,7 +12,7 @@ const useAdmin = (email) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${email}`)
+    fetch(`https://used-phone-resale-server-side.vercel.app/user/${email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

@@ -16,7 +16,7 @@ const PramentForm = ({ bookingPhone }) => {
   const navigate = useNavigate();
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-phone", {
+    fetch("https://used-phone-resale-server-side.vercel.app/create-payment-phone", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const PramentForm = ({ bookingPhone }) => {
         transactionId: paymentIntent.id,
         bookingId:bookingPhone?._id,
       };
-      fetch("http://localhost:5000/payments", {
+      fetch("https://used-phone-resale-server-side.vercel.app/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",

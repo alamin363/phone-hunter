@@ -55,7 +55,7 @@ const router = createBrowserRouter([
           </PrivetRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.id}`),
+          fetch(`https://used-phone-resale-server-side.vercel.app/category/${params.id}`),
       },
     ],
   },
@@ -101,7 +101,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:email",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookingProduct?email=${params.email}`),
+          fetch(`https://used-phone-resale-server-side.vercel.app/bookingProduct?email=${params.email}`),
         element: (
           // <PrivetRouter>
           <Payment />

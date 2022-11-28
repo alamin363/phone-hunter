@@ -10,11 +10,11 @@ const Home = () => {
   const {} = useContext(AuthContext)
   const {data : categoryDAta = [], refetch,isLoading,error,} = useQuery({
     queryKey: ["brand"],
-    queryFn: () => fetch("http://localhost:5000/category").then(data => data.json())
+    queryFn: () => fetch("https://used-phone-resale-server-side.vercel.app/category").then(data => data.json())
   });
   const {data : Advertised = [], refetch : reloade ,isLoading : loading} = useQuery({
     queryKey: ["Advertise"],
-    queryFn: () => fetch("http://localhost:5000/Advertise").then(data => data.json())
+    queryFn: () => fetch("https://used-phone-resale-server-side.vercel.app/Advertise").then(data => data.json())
   });
   if (isLoading) {
     return <Loader />

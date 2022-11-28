@@ -13,7 +13,7 @@ const User = () => {
       fetch("http://localhost:5000/user").then((res) => res.json()),
   });
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/admin/${id}`, {
+    fetch(`https://used-phone-resale-server-side.vercel.app/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage?.getItem("accessToken")}`,
@@ -29,7 +29,7 @@ const User = () => {
   };
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/usersseler/${id}`,{
+    fetch(`https://used-phone-resale-server-side.vercel.app/usersseler/${id}`,{
       method:"DELETE"
     });
   };

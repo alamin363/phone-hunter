@@ -15,7 +15,7 @@ const MyOrders = () => {
   } = useQuery({
     queryKey: ["order"],
     queryFn: () =>
-      fetch(`http://localhost:5000/bookingProduct?email=${email}`).then((res) =>
+      fetch(`https://used-phone-resale-server-side.vercel.app/bookingProduct?email=${email}`).then((res) =>
         res.json()
       ),
   });

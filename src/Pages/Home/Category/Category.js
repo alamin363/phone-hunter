@@ -35,7 +35,7 @@ const Category = () => {
                 Original Price:
                 <small className="font-extrabold">
                   {" "}
-                  {singleData.orginalprice ? singleData.orginalprice :  25000} TK
+                  {singleData.orginalprice ? singleData.orginalprice :  25000 } TK
                 </small>
               </p>
               <p>

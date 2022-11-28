@@ -35,10 +35,9 @@ const Dashboard = () => {
                 </li>
               </>
             )}
-
-           {isAdmin === "user" && <li>
+           <li>
               <Link to="/dashboard/order">My orders</Link>
-            </li>}
+            </li>
 
             {isAdmin === "admin" && (
               <li>

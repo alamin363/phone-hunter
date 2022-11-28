@@ -32,7 +32,7 @@ const AddProduct = () => {
       .then((datas) => {
         if (datas.success) {
           data.image = datas.data.display_url;
-          fetch("http://localhost:5000/postdata", {
+          fetch("https://used-phone-resale-server-side.vercel.app/postdata", {
             method: "POST",
             headers: {
               "content-type": "application/json",

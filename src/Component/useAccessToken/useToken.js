@@ -4,7 +4,7 @@ const useToken = (email) => {
   const [accessTokens, seraccessToken] = useState('');
   useEffect(() => {
       if (email) {
-          fetch(`http://localhost:5000/jwtgenaretor/${email}`)
+          fetch(`https://used-phone-resale-server-side.vercel.app/jwtgenaretor/${email}`)
               .then(res => res.json())
               .then(data => {
                   if (data.accessToken) {

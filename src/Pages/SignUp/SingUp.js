@@ -87,7 +87,7 @@ const SingUp = () => {
   const userBase = (data) => {
     console.log(data);
     if (data) {
-      fetch("http://localhost:5000/user", {
+      fetch("https://used-phone-resale-server-side.vercel.app/user", {
         method: "POST",
         headers: {
           "content-type": "application/json",

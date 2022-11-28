@@ -22,7 +22,7 @@ const MyProductCard = ({ dt, refetch }) => {
     _id,
   } = dt;
   const deleteConfirm = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://used-phone-resale-server-side.vercel.app/product/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -34,7 +34,7 @@ const MyProductCard = ({ dt, refetch }) => {
         toast.error("delete filed check connection");
       });
 
-    fetch(`http://localhost:5000/ads/${id}`, {
+    fetch(`https://used-phone-resale-server-side.vercel.app/ads/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -51,7 +51,7 @@ const MyProductCard = ({ dt, refetch }) => {
     Ads.Advertised = "Ads"
     Ads.id = _id;
 
-    fetch(`http://localhost:5000/Advertise`, {
+    fetch(`https://used-phone-resale-server-side.vercel.app/Advertise`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
