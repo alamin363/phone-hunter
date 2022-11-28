@@ -16,6 +16,10 @@ import Admin from "./Pages/Admin/Admin";
 import Myproduct from "./Pages/Myproduct/Myproduct";
 import AdminRouter from "./Pages/AdminRouter/AdminRouter";
 import PopulerProduct from "./Pages/PopulerProduct/PopulerProduct";
+import SellerRout from "./Pages/SellerRout/SellerRout";
+import User from "./Pages/User/User";
+import DashbordCart from "./Pages/Dashboard/DashbordCart";
+import Seller from "./Pages/Admin/SellerCard/Seller";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,52 +61,86 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivetRouter>
+        <Dashboard />
+      </PrivetRouter>
+    ),
     errorElement: <Error />,
     children: [
       {
         path: "/dashboard",
-        element:<PrivetRouter><AddProduct /></PrivetRouter> ,
+        element: <DashbordCart />,
       },
+      // {
+      //   path: "/dashboard/seller",
+      //   element: (
+      //     // <PrivetRouter>
+      //     //   <SellerRou>
+      //     <Admin />
+      //     // </SellerRou>
+      //     // <PrivetRouter>
+      //   ),
+      // },
       {
         path: "/dashboard/order",
         element: (
-          <PrivetRouter>
-            <MyOrders />
-          </PrivetRouter>
+          // <PrivetRouter>
+          <MyOrders />
+          // </PrivetRouter>
+        ),
+      },
+      {
+        path: "/dashboard/addproduct",
+        element: (
+          // <PrivetRouter>
+          <AddProduct />
+          // </PrivetRouter> *
         ),
       },
       {
         path: "/dashboard/payment",
         element: (
+          // <PrivetRouter>
+          <Payment />
+          // </PrivetRouter> *
+        ),
+      },
+      {
+        path: "/dashboard/seller",
+        element: (
           <PrivetRouter>
-            <Payment />
+            <AdminRouter>
+              <Admin />
+            </AdminRouter>
           </PrivetRouter>
         ),
       },
       {
-        path: "/dashboard/admin",
+        path: "/dashboard/users",
         element: (
-          <AdminRouter>
-            {" "}
-            <Admin />{" "}
-          </AdminRouter>
+          // <PrivetRouter>
+          //   <AdminRouter>
+              <User />
+            // </AdminRouter>
+          // </PrivetRouter> 
         ),
       },
       {
         path: "/dashboard/myproduct",
         element: (
-          <PrivetRouter>
-            <Myproduct />
-          </PrivetRouter>
+          // <PrivetRouter>
+          //   <SellerRout>
+              <Myproduct />
+          //   </SellerRout>
+          // </PrivetRouter>
         ),
       },
       {
         path: "*",
-        element: <Error /> ,
+        element: <Error />,
       },
     ],
-      
   },
 ]);
 function App() {

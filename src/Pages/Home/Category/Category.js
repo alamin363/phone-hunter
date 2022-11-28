@@ -8,6 +8,7 @@ const Category = () => {
   
   const data = useLoaderData();
   const [modalData, setModalData] = useState(null);
+  console.log(data);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {data.map((singleData) => {
@@ -34,13 +35,13 @@ const Category = () => {
                 Original Price:
                 <small className="font-extrabold">
                   {" "}
-                  {singleData.orginalprice} TK
+                  {singleData.orginalprice ? singleData.orginalprice :  25000} TK
                 </small>
               </p>
               <p>
                 Resale Price:
                 <small className="font-extrabold">
-                  {singleData.recelPrice} TK
+                  {singleData.Price} TK
                 </small>
               </p>
               <p>

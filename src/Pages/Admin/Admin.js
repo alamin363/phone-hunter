@@ -1,36 +1,55 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../Context/ContextProvider";
+import Loader from "../Loader/Loader";
 import AdminCard from "./AdminCard";
+import Seller from "./SellerCard/Seller";
 
 const Admin = () => {
+  const { loader } = useContext(AuthContext);
+
   const {
-    data: users = [],
+    data: seller = [],
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      fetch("http://localhost:5000/user").then((res) => res.json()),
+      fetch("http://localhost:5000/seller").then((res) => res.json()),
   });
-  if (isLoading) {
-    return <h1> loading ..</h1>;
+  if (isLoading || loader) {
+    return <Loader />;
   }
+  console.log(seller);
+
   const handleMakeAdmin = (id) => {
     fetch(`http://localhost:5000/admin/${id}`, {
       method: "PUT",
       headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `bearer ${localStorage?.getItem("accessToken")}`,
       },
-    }).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err);
     })
+      .then((res) => {
+        console.log(res);
+        refetch();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const handleDelete = (id) => {
-    console.log(id)
-    fetch(`http://localhost:5000/`);
+    console.log(id);
+    fetch(`http://localhost:5000/usersseler/${id}`, {
+      method: "DELETE",
+    }).then(res => {
+      refetch()
+    }).catch(error => {
+      toast.error(error.message)
+    })
   };
+
   return (
     <div>
       <div>
@@ -48,16 +67,16 @@ const Admin = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
-                <tr key={user._id}>
+              {seller?.map((user, index) => (
+                <tr key={user?._id}>
                   <th>{index + 1}</th>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+                  <td>{user?.name}</td>
+                  <td>{user?.email}</td>
                   <td>{user?.role}</td>
                   <td>
-                    {!user?.role && (
+                    {user?.role !== "admin" && (
                       <button
-                        onClick={() => handleMakeAdmin(user._id)}
+                        onClick={() => handleMakeAdmin(user?._id)}
                         className="btn btn-xs btn-primary"
                       >
                         Make Admin
@@ -65,7 +84,12 @@ const Admin = () => {
                     )}
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(user._id)} className="btn btn-xs btn-danger">Delete</button>
+                    <button
+                      onClick={() => handleDelete(user?._id)}
+                      className="btn btn-xs btn-danger"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -73,6 +97,7 @@ const Admin = () => {
           </table>
         </div>
       </div>
+      {/* <Seller users={users} handleMakeAdmin={handleMakeAdmin} handleDelete={handleDelete}></Seller> */}
     </div>
   );
 };

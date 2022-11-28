@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Context/ContextProvider";
 import { toast } from "react-hot-toast";
+import useToken from "../../Component/useAccessToken/useToken";
+import Loader from "../Loader/Loader";
 const Login = () => {
   const { signInWithEmailPass, signInWithGoogle, user, setLoader, loader } =
     useContext(AuthContext);
@@ -13,15 +15,19 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const [error, setError] = useState(null);
-   const navigate = useNavigate()
-   const location = useLocation();
-   const from = location.state?.from?.pathname || "/"
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [accessTokens] = useToken(user?.email);
+  const from = location.state?.from?.pathname || "/";
+  if (accessTokens) {
+    return navigate(from, { replace: true });
+  }
   const handelGoogleLogIn = () => {
     signInWithGoogle()
       .then((res) => {
         toast.success("Login successfully");
         // userBase(res?.user?.email);
-        navigate(from , {replace: true})
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         setError("user not found please singUp");
@@ -33,12 +39,12 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         toast.success("Login successfully");
-        navigate(from , {replace: true})
+
         // userBase(data);
       })
       .catch((err) => {
         setError("user not found please singUp");
-        setLoader(false);
+        setLoader(false)
       });
   };
   // const userBase = (data) => {
@@ -56,6 +62,9 @@ const Login = () => {
   //       });
   // }
   //  }
+  if (loader) {
+    return <Loader />
+  }
   return (
     <div className="flex justify-center items-center pt-8">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -129,12 +138,10 @@ const Login = () => {
             Sign up
           </Link>
         </p>
-        {
-          error && <p className="text-red-500 font-semibold">{error}</p>
-        }
+        {error && <p className="text-red-500 font-semibold">{error}</p>}
       </div>
     </div>
   );
- }
+};
 
 export default Login;

@@ -4,9 +4,9 @@ import { AuthContext } from "../Context/ContextProvider";
 import Loader from "../Loader/Loader";
 
 const PrivetRouter = ({ children }) => {
-  const { user, loader } = useContext(AuthContext);
+  const { user, loader } = useContext( AuthContext );
   const location = useLocation();
-  if (loader) {
+  if ( loader  ) {
     return <Loader />;
   }
   if (!user) {

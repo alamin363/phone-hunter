@@ -53,7 +53,7 @@ const Navbar = () => {
             <li>
               {user ? (
                 <>
-                  <NavLink to="/dashboard">Dashboard</NavLink>
+                  <NavLink to="/dashboard/seller">Dashboard</NavLink>
                   <Link onClick={handelLogOut}>Logout </Link>
                 </>
               ) : (

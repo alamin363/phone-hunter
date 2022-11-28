@@ -1,14 +1,17 @@
+import { data } from "autoprefixer";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import useToken from "../../Component/useAccessToken/useToken";
 import { AuthContext } from "../Context/ContextProvider";
 import Loader from "../Loader/Loader";
 
 const SingUp = () => {
   const [users, setUser] = useState(false);
   const [selears, setSelears] = useState(false);
-  const naviagete = useNavigate()
+  const [createUser, setCreateUser] = useState('')
+  const naviagete = useNavigate();
   const {
     createUserWithEmailPass,
     updateUserProfile,
@@ -24,22 +27,24 @@ const SingUp = () => {
     watch,
     formState: { errors },
   } = useForm();
-
+  const [accessTokens] = useToken(createUser)
+  if (accessTokens) {
+    naviagete("/")
+  }
   const handelGoogleLogIn = () => {
     signInWithGoogle()
       .then((res) => {
         toast.success("Login successfully");
-        // userBase(res?.user?.email);
-        naviagete("/")
-        setLoader(false);
+        console.log(res);
+        // userBase(data);
       })
       .catch((err) => {
-        setLoader(false);
         setError(err?.message);
       });
   };
 
   const handelSignUpForm = (data) => {
+
     const formData = new FormData();
     formData.append("image", data.image[0]);
     //  env file thika value paitece na
@@ -53,7 +58,6 @@ const SingUp = () => {
         console.log(imgData);
         createUserWithEmailPass(data?.email, data?.password)
           .then((res) => {
-            // console.log(res);
             updateUserProfile(data?.name, imgData.data.display_url).then(
               (datas) => {
                 data.image = imgData.data.display_url;
@@ -69,6 +73,7 @@ const SingUp = () => {
             );
           })
           .catch((err) => {
+            setLoader(false)
             console.log(err?.message);
           });
       })
@@ -89,12 +94,16 @@ const SingUp = () => {
         body: JSON.stringify(data),
       })
         .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
+        .then((datas) => {
+          console.log(datas);
+          setCreateUser(data?.email)
         })
         .catch((error) => {});
     }
   };
+  if (loader) {
+    return <Loader />
+  }
   return (
     <div className="flex justify-center items-center pt-8">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">

@@ -6,7 +6,8 @@ import Loader from "../Loader/Loader";
 
 const AdminRouter = ({ children }) => {
   const { user, loader } = useContext(AuthContext);
-  const [isAdmin, isSeller, isLoading] = useAdmin(user?.email);
+  const [isAdmin, isLoading] = useAdmin(user?.email);
+
   const location = useLocation();
 
   if (loader || isLoading) {

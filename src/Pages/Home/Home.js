@@ -17,7 +17,7 @@ const Home = () => {
     queryFn: () => fetch("http://localhost:5000/Advertise").then(data => data.json())
   });
   if (isLoading) {
-    return <p>Loading ...</p>
+    return <Loader />
   }
   return (
     <div>

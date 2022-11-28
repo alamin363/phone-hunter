@@ -139,7 +139,7 @@ const AddProduct = () => {
           <input
             type="number"
             id="name"
-            {...register("recelPrice")}
+            {...register("Price")}
             placeholder="Enter Your Product Price"
             className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:border-b-primary focus:border-b-4 bg-gray-200 text-gray-900"
           />

@@ -7,10 +7,11 @@ import Navbar from "../Navber/Navber";
 
 const Dashboard = () => {
   const { user, loader } = useContext(AuthContext);
-  // const [isAdmin, isSeller, isLoading] = useAdmin(user?.email);
+  const [isAdmin, isLoading, ] = useAdmin(user?.email);
 
-  if (loader) {
-    return <Loader />
+  // 
+  if (loader ) {
+    return <Loader />;
   }
   return (
     <div>
@@ -23,7 +24,7 @@ const Dashboard = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-            {/* {isSeller && ( */}
+            {isAdmin === "seller" && (
               <>
                 <li>
                   <Link to="/dashboard/addproduct">Add A product</Link>
@@ -33,15 +34,19 @@ const Dashboard = () => {
                   <Link to="/dashboard/myproduct">my product</Link>
                 </li>
               </>
-            {/* )} */}
-            <li>
+            )}
+
+           {isAdmin === "user" && <li>
               <Link to="/dashboard/order">My orders</Link>
-            </li>
-            <li>
-            {/* {isAdmin && ( */}
-              <Link to="/dashboard/admin">Admin</Link>
-            {/* )} */}
-            </li>
+            </li>}
+
+            {isAdmin === "admin" && (
+              <li>
+                <Link to="/dashboard/seller">seller</Link>
+
+                <Link to="/dashboard/users">users</Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
